@@ -13,13 +13,23 @@ from django.conf import settings
 
 import datetime
 
-from cas_provider.models import ServiceTicket
+from cas_provider.models import ServiceTicket, LoginTicket
 
 class Command(NoArgsCommand):
     help = "Delete expired service tickets from the database"
 
     def handle_noargs(self, **options):
+        print "Service tickets:"
         tickets = ServiceTicket.objects.all()
+        for ticket in tickets:
+            expiration = datetime.timedelta(minutes=settings.CAS_TICKET_EXPIRATION)
+            if datetime.datetime.now() > ticket.created + expiration:
+                print "Deleting %s..." % ticket.ticket
+                ticket.delete()
+            else:
+                print "%s not expired..." % ticket.ticket
+        tickets = LoginTicket.objects.all()
+        print "Login tickets:"
         for ticket in tickets:
             expiration = datetime.timedelta(minutes=settings.CAS_TICKET_EXPIRATION)
             if datetime.datetime.now() > ticket.created + expiration:
