@@ -23,7 +23,7 @@ INSTALLATION
 
 To install, run the following command from this directory:
 
-		``python setup.py install``
+    	``python setup.py install``
 
 Or, put cas_provider somewhere on your Python path.
 	
@@ -32,7 +32,5 @@ USAGE
 
 #. Add ``'cas_provider'`` to your ``INSTALLED_APPS`` tuple in *settings.py*.
 #. In *settings.py*, set ``LOGIN_URL`` to ``'/cas/login/'`` and ``LOGOUT_URL`` to ``'/cas/logout/'``
-	before they expire. Default: 5 minutes
-#. In *urls.py*, put the following line:
-    ``(r'^cas/', include('cas_provider.urls')),``
+#. In *urls.py*, put the following line: ``(r'^cas/', include('cas_provider.urls')),``
 #. Create login/logout templates (or modify the samples)
