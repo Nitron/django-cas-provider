@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+  <form action='.' method='post'>
+    <fieldset>
+      <legend>Log in to your account</legend>
+      {% if errors %}
+        <ul>
+            {% for error in errors %}
+                <li>{{ error|escape }}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+      <table style="border: none;">
+        {{ form.as_table }}
+      </table>
+      <p><input type="submit" value="Login"/></p>
+    </fieldset>
+  </form>
+{% endblock %}

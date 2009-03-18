@@ -1,7 +1,5 @@
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render_to_response, get_list_or_404
-from django.core.urlresolvers import reverse
-from django.core.exceptions import SuspiciousOperation
+from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
