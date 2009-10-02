@@ -3,9 +3,9 @@ import string
 
 from models import ServiceTicket, LoginTicket
 
-def _generate_string(length=8, chars=string.letters + string.digits):
+def _generate_string(length=8, chars=string.ascii_letters + string.digits):
     """ Generates a random string of the requested length. Used for creation of tickets. """
-    return ''.join(Random().sample(string.letters+string.digits, length))
+    return ''.join(Random().sample(chars, length))
 
 def create_service_ticket(user, service):
     """ Creates a new service ticket for the specified user and service.
