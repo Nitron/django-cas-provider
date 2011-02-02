@@ -59,10 +59,10 @@ def validate(request):
             ticket = ServiceTicket.objects.get(ticket=ticket_string)
             username = ticket.user.username
             ticket.delete()
-            return HttpResponse("yes\n\r%s\n\r" % username)
+            return HttpResponse("yes\r\n%s\r\n" % username)
         except:
             pass
-    return HttpResponse("no\n\r\n\r")
+    return HttpResponse("no\r\n\r\n")
     
 def logout(request, template_name='cas/logout.html'):
     url = request.GET.get('url', None)
