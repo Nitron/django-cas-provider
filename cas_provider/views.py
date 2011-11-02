@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login, logout as auth_logout
+from django.conf import settings
 
 from forms import LoginForm
 from models import ServiceTicket, LoginTicket
@@ -11,6 +12,8 @@ from utils import create_service_ticket
 __all__ = ['login', 'validate', 'logout']
 
 def login(request, template_name='cas/login.html', success_redirect='/accounts/'):
+    if settings.LOGIN_REDIRECT_URL:
+        success_redirect = settings.LOGIN_REDIRECT_URL
     service = request.GET.get('service', None)
     if request.user.is_authenticated():
         if service is not None:
