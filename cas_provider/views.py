@@ -11,9 +11,11 @@ from utils import create_service_ticket
 
 __all__ = ['login', 'validate', 'logout']
 
-def login(request, template_name='cas/login.html', success_redirect='/accounts/'):
-    if settings.LOGIN_REDIRECT_URL:
-        success_redirect = settings.LOGIN_REDIRECT_URL
+def login(request, template_name='cas/login.html', success_redirect=None ):
+    if not success_redirect:
+        success_redirect = settings.get('LOGIN_REDIRECT_URL', None)
+    if not success_redirect:
+        success_redirect = '/accounts/profile/'
     service = request.GET.get('service', None)
     if request.user.is_authenticated():
         if service is not None:
