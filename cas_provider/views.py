@@ -45,7 +45,12 @@ def login(request, template_name='cas/login.html', success_redirect=None ):
                     auth_login(request, user)
                     if service is not None:
                         ticket = create_service_ticket(user, service)
-                        return HttpResponseRedirect(service + '?ticket=' + ticket.ticket)
+
+                        # Check to see if we already have a query string
+                        if service.find('?') == -1:
+                            return HttpResponseRedirect(service + '?ticket=' + ticket.ticket)
+                        else:
+                            return HttpResponseRedirect(service + '&ticket=' + ticket.ticket)
                     else:
                         return HttpResponseRedirect(success_redirect)
                 else:
