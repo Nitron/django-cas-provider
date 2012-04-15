@@ -13,7 +13,7 @@ __all__ = ['login', 'validate', 'logout']
 
 def login(request, template_name='cas/login.html', success_redirect=None ):
     if not success_redirect:
-        success_redirect = settings.get('LOGIN_REDIRECT_URL', None)
+        success_redirect = settings.LOGIN_REDIRECT_URL
     if not success_redirect:
         success_redirect = '/accounts/profile/'
     service = request.GET.get('service', None)
